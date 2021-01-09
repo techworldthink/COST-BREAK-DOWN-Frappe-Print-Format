@@ -1,0 +1,38 @@
+.center{
+    display:block;
+    text-align: center;
+}
+.green{
+    color: #00992b;
+}
+.annexure{
+    margin-top: 1em;
+}
+.main-head{
+    margin-top: 2em;
+}
+svg{
+    margin-bottom: 1em;
+}
+.item{
+    border: 1px solid black;
+    margin-top: 3em;
+    width: 100%;
+}
+.item th,.item td,.item tr{
+    border: 1px solid black;
+}
+.footer{
+    background-color:#3ac93a ;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px;
+}
+.table-head{
+    background-color: #3ac93a;
+    text-align: center;
+}
+.contact{
+    font-size: 12px;
+    margin-top: 10px;
+}
