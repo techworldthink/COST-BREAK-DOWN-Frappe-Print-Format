@@ -10,14 +10,17 @@
 }
 .main-head{
     margin-top: 2em;
+    font-size: 25px;
+    font-weight: bold;
 }
 svg{
-    margin-bottom: 1em;
+    margin-bottom: 4em;
 }
 .item{
     border: 1px solid black;
     margin-top: 3em;
     width: 100%;
+    margin-bottom: 3em;
 }
 .item th,.item td,.item tr{
     border: 1px solid black;
@@ -27,6 +30,7 @@ svg{
     font-size: 12px;
     font-weight: bold;
     padding: 10px;
+    margin-bottom: 2em;
 }
 .table-head{
     background-color: #3ac93a;
@@ -34,5 +38,16 @@ svg{
 }
 .contact{
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 5em;
+}
+
+.column-box{
+    float:left;
+    width: 33%;
+}
+.column-box-right{
+    float:right;
+    width: 33%;
+    margin-right: 6em;
+    margin-bottom: 3em;
 }
