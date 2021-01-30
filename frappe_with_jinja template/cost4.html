@@ -1,0 +1,202 @@
+{% macro above_items() %}
+<div class="container-fluid">
+
+    <h2 class="center green annexure">ANNEXURE</h2>
+
+
+    <div class="column-box1">
+        <b>Head Office :</b>
+        <p>
+            Wahni Green Technologies Pvt. Ltd.<br>
+            Vikas Trust Rural Apparel Park,<br>
+            Talikulam PO,Thrissur-680569 <br>
+            CIN:U74999KL2016PTC046222 <br>
+            GST No.: 32AABCW8543N1ZX<br>
+        </p>
+    </div>
+
+    <div class="column-box2">
+        <h2 class="main-head">COST BREAK DOWN</h2>
+    </div>
+
+    <div class="column-box3">
+        <img src="/files/wahni.png" class=" rounded mx-auto d-block" alt="Logo">
+    </div>
+
+
+    <svg height="5" width="100%">
+        <line x1="0" y1="0" x2="100%" y2="0" style="stroke:#00992b;stroke-width:5" />
+    </svg>
+
+
+    <div class="">
+        <div class="column-box data_part">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Customer Name </th>
+                        <td>: {{ doc.cus_name }} </td>
+                    </tr>
+                    <tr>
+                        <th>Customer Code </th>
+                        <td>: {{ doc.cus_code }} </td>
+                    </tr>
+                    <tr>
+                        <th>Payment </th>
+                        <td>: {{ doc.payment }} </td>
+                    </tr>
+                    <tr>
+                        <th>Buyer Order No </th>
+                        <td>: {{ doc.buy_no }} </td>
+                    </tr>
+                    <tr>
+                        <th>Dispatched With </th>
+                        <td>: {{ doc.dis_with }} </td>
+                    </tr>
+                    <tr>
+                        <th>Dispatched No </th>
+                        <td>: {{ doc.dis_no }} </td>
+                    </tr>
+                    <tr>
+                        <th>Delivery Note </th>
+                        <td>: {{ doc.del_note }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="column-box-right data_part">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Date </th>
+                        <td>: {{ doc.date }} </td>
+                    </tr>
+                    <tr>
+                        <th>Bill No </th>
+                        <td>: {{ doc.bill_no }} </td>
+                    </tr>
+                    <tr>
+                        <th>Gst No </th>
+                        <td>: {{ doc.gst_no }} </td>
+                    </tr>
+                    <tr>
+                        <th>Mobile </th>
+                        <td>: {{ doc.mob }} </td>
+                    </tr>
+                    <tr>
+                        <th>Email ID </th>
+                        <td>: {{ doc.email }} </td>
+                    </tr>
+                    <tr>
+                        <th>Billing Address </th>
+                        <td>: {{ doc.bill_add }}</td>
+                    </tr>
+                    <tr>
+                        <th>Delivery Address </th>
+                        <td>: {{ doc.del_add }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <table class="item" style="margin-top:1em !important">
+        <tbody>
+            <tr class="table-head">
+                <th>No </th>
+                <th>Item and Description </th>
+                <th>HSN/ SAC </th>
+                <th>Qty </th>
+                <th>Unit </th>
+                <th>MRP </th>
+                <th>Discount </th>
+                <th>Net Amount </th>
+            </tr>
+{% endmacro %}
+
+
+
+{% macro total_items() %}
+            <tr>
+                <td>6 </td>
+                <th colspan="2" class="bold left-td">Total </th>
+                <td>{{doc.add_items|sum( attribute='qty') }}</td>
+                <td>{{doc.add_items|sum( attribute='unit') }} </td>
+                <td>{{doc.add_items|sum( attribute='mrp') }} </td>
+                <td>{{doc.add_items|sum( attribute='dis') }} </td>
+                <td>{{doc.add_items|sum( attribute='total') }}</td>
+            </tr>
+
+{% endmacro %}
+
+{% macro table_close() %}
+    </tbody>
+     </table>
+{% endmacro %}
+
+    {% macro below_items() %}
+    <div class="row">
+        <div class="col-md-12">
+            <p class="contact"><b>Registered Address:</b> 763A (7/281), Eruvakkoor, Cheruvathoor P.O,Kasargod, Kerala-
+                671313, India,
+                <b>Customer Care:</b> +91 8047111555 Office:+91 73565 81555 Grievance: +91 7345651555, <b>Email:</b>
+                sales@wahni.com, Web: wahni.com, A/C: No. 10140200017210, IFSC - FDRL0001014
+            </p>
+            <p class="footer">
+                Being a customer, you have all the rights to return the product, if it is not functioning according
+                to the specification or your satisfaction. However, the product should be returned within 10 days
+                after delivery without any deformation.
+            </p>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{{ above_items() }}
+{% set pr = [1] %}
+{% set lines = [0] %}
+{%- for row in doc.add_items -%}
+{% if lines[-1] %} {% endif %}
+{% if lines.append( lines[-1] + 2 +((row.item|string|length() / 38)|int)) %} {% endif %}
+{% if (row.item|string|length % 38) > 0 %}
+{% if lines[-1] %} {% endif %}
+{% if lines.append( lines[-1] + 1 ) %} {% endif %}
+{% endif %}
+{% if (lines[-1]/75) <= pr[-1] %} <tr>
+    <td>1 </td>
+    <td>{{ row.item }}</td>
+    <td>{{ row.hsn }} </td>
+    <td>{{ row.qty }}</td>
+    <td>{{ row.unit }}</td>
+    <td>{{ row.mrp }}</td>
+    <td>{{ row.dis }}</td>
+    <td>{{ row.total }}</td>
+    </tr>
+    {% else %}
+    {{table_close() }}
+    {{ below_items() }}
+    <div style="page-break-before: always;"></div>
+    {% if pr[-1] %} {% endif %}
+    {% if pr.append( pr[-1] + 1 ) %} {% endif %}
+    {{ above_items() }}
+
+    <tr>
+        <td>1 </td>
+        <td> {{ row.item }} </td>
+        <td> {{ row.hsn }} </td>
+        <td>{{ row.qty }}</td>
+        <td>{{ row.unit }}</td>
+        <td>{{ row.mrp }}</td>
+        <td>{{ row.dis }} </td>
+        <td>{{ row.total }} </td>
+    </tr>
+    {% endif %}
+    {%- endfor -%}
+
+    {{ total_items() }}
+    {{table_close() }}
+    {% for n in range(((85-lines[-1]%75)/3)|int) %}
+    <br>
+    {% endfor %}
+    {{ below_items() }}
