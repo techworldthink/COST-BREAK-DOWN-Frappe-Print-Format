@@ -1,0 +1,95 @@
+<!-- head part start -->
+{{ section_one_start() }}
+{{ section_one_one() }}
+{{ section_one_two() }}
+{{ section_one_three() }}
+{{ section_one_stop() }}
+<!-- head part end -->
+
+<!-- customer details part start -->
+{{ section_two() }}
+<!-- customer details part end -->
+
+<!-- table head details part start -->
+{{ section_three_head() }}
+<!-- table head details part end -->
+
+{% set pr = [1] %}
+{% set lines = [0] %}
+
+<!-- ********   Dynamic content in rows start ******************************* -->
+
+{%- for row in doc.add_items -%}
+
+{% if lines[-1] %} {% endif %}
+{% if lines.append( lines[-1] + 2 +((row.item|string|length() / 38)|int)) %} {% endif %}
+{% if (row.item|string|length % 38) > 0 %}
+{% if lines[-1] %} {% endif %}
+{% if lines.append( lines[-1] + 1 ) %} {% endif %}
+{% endif %}
+{% if (lines[-1]/73) <= pr[-1] %} <tr>
+
+    <!--   ROWS    -->
+    <td>1 </td>
+    <td>{{ row.item }}</td>
+    <td>{{ row.hsn }} </td>
+    <td>{{ row.qty }}</td>
+    <td class="fix_right">{{ row.unit }}</td>
+    <td class="fix_right">{{ row.mrp }}</td>
+    <td class="fix_right">{{ row.dis }}</td>
+    <td class="fix_right">{{ row.total }}</td>
+    </tr>
+    <!--   ROWS END   -->
+
+{% else %}
+
+{{ section_three_close() }}
+{{ section_four() }}
+
+    <h5 class="page_no"> {{ pr[-1] }}</h5>
+    <div style="page-break-before: always;"></div>
+    {% if pr[-1] %} {% endif %}
+    {% if pr.append( pr[-1] + 1 ) %} {% endif %}
+
+<!-- head part start -->
+{{ section_one_start() }}
+{{ section_one_one() }}
+{{ section_one_two() }}
+{{ section_one_three() }}
+{{ section_one_stop() }}
+<!-- head part end -->
+
+    <h5 class="page_no_">Continuation from page {{ pr[-1]-1 }} ....</h5>
+
+<!-- table head details part start -->
+{{ section_three_head() }}
+<!-- table head details part end -->
+
+    <!--   ROWS    -->
+    <tr>
+        <td>1 </td>
+        <td> {{ row.item }} </td>
+        <td> {{ row.hsn }} </td>
+        <td>{{ row.qty }}</td>
+        <td class="fix_right">{{ row.unit }}</td>
+        <td class="fix_right">{{ row.mrp }}</td>
+        <td class="fix_right">{{ row.dis }} </td>
+        <td class="fix_right">{{ row.total }} </td>
+    </tr>
+    <!--   ROWS  END  -->
+
+{% endif %}
+{%- endfor -%}
+
+<!--************************Dynamic content in rows end********************************-->
+
+    {{ section_three_total() }}
+    {{ section_three_close() }}
+
+    {% for n in range(((94-lines[-1]%75)/3)|int) %}
+    <br>
+    {% endfor %}
+
+    {{ section_four() }}
+    
+    <h5 class="page_no"> {{ pr[-1] }}</h5>

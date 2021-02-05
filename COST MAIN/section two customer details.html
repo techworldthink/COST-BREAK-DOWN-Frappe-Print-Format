@@ -1,0 +1,73 @@
+{% macro section_two() %}
+<div class="">
+    <div class="column-box data_part">
+        <table>
+            <tbody>
+                <tr>
+                    <th>Customer Name </th>
+                    <td>: {{ doc.cus_name }} </td>
+                </tr>
+                <tr>
+                    <th>Customer Code </th>
+                    <td>: {{ doc.cus_code }} </td>
+                </tr>
+                <tr>
+                    <th>Payment </th>
+                    <td>: {{ doc.payment }} </td>
+                </tr>
+                <tr>
+                    <th>Buyer Order No </th>
+                    <td>: {{ doc.buy_no }} </td>
+                </tr>
+                <tr>
+                    <th>Dispatched With </th>
+                    <td>: {{ doc.dis_with }} </td>
+                </tr>
+                <tr>
+                    <th>Dispatched No </th>
+                    <td>: {{ doc.dis_no }} </td>
+                </tr>
+                <tr>
+                    <th>Delivery Note </th>
+                    <td>: {{ doc.del_note }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="column-box-right data_part">
+        <table>
+            <tbody>
+                <tr>
+                    <th>Date </th>
+                    <td>: {{ doc.date }} </td>
+                </tr>
+                <tr>
+                    <th>Bill No </th>
+                    <td>: {{ doc.bill_no }} </td>
+                </tr>
+                <tr>
+                    <th>Gst No </th>
+                    <td>: {{ doc.gst_no }} </td>
+                </tr>
+                <tr>
+                    <th>Mobile </th>
+                    <td>: {{ doc.mob }} </td>
+                </tr>
+                <tr>
+                    <th>Email ID </th>
+                    <td>: {{ doc.email }} </td>
+                </tr>
+                <tr>
+                    <th>Billing Address </th>
+                    <td>: {{ doc.bill_add }}</td>
+                </tr>
+                <tr>
+                    <th>Delivery Address </th>
+                    <td>: {{ doc.del_add }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endmacro %}

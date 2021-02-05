@@ -1,0 +1,164 @@
+.fix_right{
+    text-align:right;
+    }
+    
+    .fix_size_dis{
+    width:60px;
+    }
+    
+    .fix_size{
+    width:90px;
+    }
+    
+    .page_no_{
+     color: green !important;
+    font-size: small;
+    }
+    
+    .page_no{
+     color: green !important;
+    font-size: small;
+     text-align:right;
+    margin-right: 1em;
+    }
+    img{
+        height: 100px;
+    }
+    
+    tbody, td, tfoot, th, thead, tr {
+        border:none !important;
+        outline:none;
+        text-align:left;
+        background-color:white !important;
+        padding:2px;
+    }
+    
+    th{
+      font-weight: bold;
+      }
+    
+    .center {
+      display: block;
+      text-align: center;
+    }
+    .green {
+      color: #00992b;
+    }
+    .annexure {
+      padding-top: 0;
+      padding-bottom: 5px;
+    }
+    .main-head {
+      margin-top: 2em !important;
+      font-size: 18px;
+      font-weight: bold;
+      color:#737373;
+    }
+    svg {
+      margin-bottom:5px;
+    }
+    .item {
+      border: 1px solid black;
+      margin-top: 1em;
+      width: 100%;
+      margin-bottom: 3em;
+    }
+    
+    .item th {
+     text-align:center;
+    }
+    
+    .item th,
+    .item td,
+    .item tr {
+      border: 1px solid black !important;
+      padding: 1px;
+    }
+    .footer {
+      background-color: #3ac93a;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 10px;
+      margin-bottom: 0em;
+    }
+    .table-head {
+      background-color: #3ac93a;
+      text-align: center;
+    }
+    .contact {
+      font-size: 12px;
+      margin-top: 4em;
+    }
+    .column-box {
+      float: left;
+    }
+    .column-box1 {
+      float: left;
+      width: 33%;
+    }
+    .column-box2 {
+      float: left;
+      text-align: center;
+      width: 34%;
+      padding-top: 3em;
+    }
+    .column-box3 {
+      float: left;
+      width: 33%;
+      text-align: right;
+      /*dding-left:3em;*/
+    }
+    .column-box-right {
+      float: right;
+      /*width: 45%;*/
+      margin-right: 6em;
+      margin-bottom: 0;
+    }
+    
+    .data_part{
+     width:40%;
+     margin-bottom: 1em;
+    }
+    
+    .data_part th{
+        background-color:white !important;
+    }
+    
+    .bold {
+      font-weight: 700;
+    }
+    
+    .left-td {
+      text-align: left;
+      padding-left: 2em;
+    }
+    
+    .print-format{
+        padding:0px !important;
+        margin:0 !important;
+        }
+    .print-format th {
+        background-color: white  ;
+       }
+    /*...........................................*/
+        @media screen {
+            .print-format {
+                width:100%;
+                padding: 0 !important;
+                margin: 0 !important;
+               height:100%;
+            }
+        }
+        
+        .print-format td, .print-format th {
+        padding: 1px !important;
+    }
+    
+    .h1, .h2, .h3, h1, h2, h3 {
+        margin-top: 0px !important;
+        margin-bottom: 10px;
+    }
+    
+    
+    
+    

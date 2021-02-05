@@ -1,0 +1,32 @@
+{% macro section_three_head() %}
+<table class="item" style="margin-top:1em !important">
+    <tbody>
+        <tr class="table-head">
+            <th>No </th>
+            <th>Item and Description </th>
+            <th>HSN/ SAC </th>
+            <th>Qty </th>
+            <th class="fix_size">Unit Price </th>
+            <th class="fix_size">MRP </th>
+            <th class="fix_size_dis">Discount </th>
+            <th class="fix_size">Net Amount </th>
+        </tr>
+{% endmacro %}
+
+{% macro section_three_total() %}
+        <tr>
+            <td>6 </td>
+            <th colspan="2" class="bold left-td">Total </th>
+            <td>{{doc.add_items|sum( attribute='qty') }}</td>
+            <td class="fix_right">{{doc.add_items|sum( attribute='unit') }} </td>
+            <td class="fix_right">{{doc.add_items|sum( attribute='mrp') }} </td>
+            <td class="fix_right">{{doc.add_items|sum( attribute='dis') }} </td>
+            <td class="fix_right">{{doc.add_items|sum( attribute='total') }}</td>
+        </tr>
+
+{% endmacro %}
+
+{% macro section_three_close() %}  
+    </tbody>
+</table>
+{% endmacro %}
