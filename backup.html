@@ -178,34 +178,13 @@
 {% set pr = [1] %}
 {% set lines = [0] %}
 {% set cond=[90] %}
-{% set page_count=[0] %}
-{% set row_count = [doc.add_items|count] %}
 
-{% if  (doc.add_items|count)/30 > ((doc.add_items|count)/30)|round|int %}
-{% if page_count.append(((doc.add_items|count)/30)|round|int +1) %} {% endif %}
-{% endif %}
 <!-- ********   Dynamic content in rows start ******************************* -->
 
 {%- for row in doc.add_items -%}
 
-<!-- ********{% if (doc.add_items|count) >30 and pr[-1]>1 %}
+{% if (doc.add_items|count) >30 and pr[-1]>1 %}
 {% if cond.append(100) %}{% endif %}
-{% endif %} -->
-
-{% if pr[-1] == 1 %}
-    {% if row_count[-1] > 30 and row_count[-1] < 35 %}
-        {% if cond.append(80) %}{% endif %}
-    {% else %}
-        {% if cond.append(90) %}{% endif %}
-    {% endif %}
-{% elif pr[-1] != page_count[-1] %}   
-    {% if row_count[-1]-(30*(pr[-1]-1)) < 30 and row_count[-1]-(30*(pr[-1]-1)) < 35 %}
-          {% if cond.append(80) %}{% endif %}
-    {% else %}
-        {% if cond.append(100) %}{% endif %}
-    {% endif %}
-{% elif pr[-1] == page_count[-1] %}
-    {% if cond.append(100) %}{% endif %}
 {% endif %}
 
 {% if lines[-1] %} {% endif %}
@@ -233,7 +212,7 @@
 {{ section_three_close() }}
 
 
-    <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
+    <h5 class="page_no"> {{ pr[-1] }}</h5>
     <div style="page-break-before: always;"></div>
     {% if pr[-1] %} {% endif %}
     {% if pr.append( pr[-1] + 1 ) %} {% endif %}
@@ -281,14 +260,5 @@
 
     {{ section_four() }}
     
-    <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
-    
-     <h3>{{ cond[-1]}}</h3>
-    <h3>{{ row_count[-1]}}</h3>
-    <h3>{{ page_count[-1]}}</h3>
-    <h3>{{ ((doc.add_items|count)/30) }} </h3>
-    <h3>{{ ((doc.add_items|count)/30)|round }} </h3>
-    <h3>{{ ((doc.add_items|count)/30)|round|int }} </h3>
-    
-    
-
+    <h5 class="page_no"> {{ pr[-1] }}</h5>
+    <h3>{{doc.add_items|count }}</h3>
