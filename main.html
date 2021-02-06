@@ -181,7 +181,7 @@
 {% set page_count=[0] %}
 {% set row_count = [doc.add_items|count] %}
 
-{% if  (doc.add_items|count)/30 > (((doc.add_items|count)/30)|round|int) +0.1  %}
+{% if  (doc.add_items|count)/30 > (((doc.add_items|count)/30)|round|int) +0.2  %}
     {% if page_count.append(((doc.add_items|count)/30)|round|int +1) %} {% endif %}
 {% else %}
     {% if page_count.append(((doc.add_items|count)/30)|round|int) %} {% endif %}
