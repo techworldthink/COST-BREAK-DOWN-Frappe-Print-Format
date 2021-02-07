@@ -181,6 +181,7 @@
 {% set page_count=[0] %}
 {% set row_count = [doc.add_items|count] %}
 {% set break_stage=[2] %}
+{% set break_mid=[1] %}
 
 <!--{% if  (doc.add_items|count)/30 > (((doc.add_items|count)/30)|round|int) +0.2  %}
     {% if page_count.append(((doc.add_items|count)/30)|round|int +1) %} {% endif %}
@@ -210,7 +211,7 @@
 <!--      lines condition start   -->
 {% if pr[-1] == 1 %}
     {% if row_count[-1] > 25 and row_count[-1] < 35 %}
-        {% if cond.append(81) %}{% endif %}
+        {% if cond.append(87) %}{% endif %}
     {% else %}
         {% if cond.append(90) %}{% endif %}
     {% endif %}
@@ -218,8 +219,17 @@
 {% elif pr[-1] == page_count[-1] %}
         {% if cond.append(87) %}{% endif %}
     
-{% elif pr[-1] != page_count[-1] %}   
-   {% if cond.append(99) %}{% endif %}
+{% elif pr[-1] != page_count[-1] %}
+    {% if (row_count[-1]-30)-(33*(pr[-1]-2)) > 29 and (row_count[-1]-30)-(33*(pr[-1]-2)) < 34 %}
+
+          {% if cond.append(87) %}{% endif %}
+          {% if break_mid[-1] == 1 %}
+          {% if lines.append(87*(pr[-1]-1)) %} {% endif %}
+           {% if break_mid.append(0) %}{% endif %}
+          {% endif %}
+    {% else %}
+          {% if cond.append(99) %}{% endif %}
+    {% endif %}
 
 {% endif %}
 <!--      lines condition start   -->
@@ -318,13 +328,13 @@
     
     <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
     
-    <h3> {{ lines[-1] }}</h3>
+    <!--<h3> {{ lines[-1] }}</h3>
      <h3>{{ cond[-1]}}</h3>
     <h3>{{ row_count[-1]}}</h3>
     <h3>{{ page_count[-1]}}</h3>
     <h3>{{ ((doc.add_items|count)/30) }} </h3>
     <h3>{{ ((doc.add_items|count)/30)|round }} </h3>
-    <h3>{{ ((doc.add_items|count)/30)|round|int }} </h3>
+    <h3>{{ ((doc.add_items|count)/30)|round|int }} </h3>-->
     
     
 
