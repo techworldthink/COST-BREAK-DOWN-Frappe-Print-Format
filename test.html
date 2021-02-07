@@ -182,42 +182,36 @@
 {% set row_count = [doc.add_items|count] %}
 {% set break_stage=[2] %}
 {% set break_mid=[1] %}
-{% set break_space=[0] %}
 {% set last_lines=[0] %}
 
-<!--{% if  (doc.add_items|count)/30 > (((doc.add_items|count)/30)|round|int) +0.2  %}
-    {% if page_count.append(((doc.add_items|count)/30)|round|int +1) %} {% endif %}
-{% else %}
-    {% if page_count.append(((doc.add_items|count)/30)|round|int) %} {% endif %}
-{% endif %}-->
+
+{% if row_count[-1] >23 and row_count[-1] < 31 %}
+    {% if page_count.append(2) %} {% endif %}
+ {% else %}
+    {% if page_count.append(1) %} {% endif %}
+{% endif %}
 
 {% if row_count[-1]-30 > 0  %}
     {% if page_count.append(1) %} {% endif %}
     {% if ((row_count[-1]-30)/33)|int > 0  %}
-        {% if page_count.append(page_count[-1]+((row_count[-1]-30)/33)|int) %} 
-            {% if break_space.append((row_count[-1]-30)%33) %}{% endif %}
-        {% endif %}
+        {% if page_count.append(page_count[-1]+((row_count[-1]-30)/33)|int) %} {% endif %}
     {% endif %}
     {% if ((row_count[-1]-30)%33)|int >= 0  %}
         {% if page_count.append(page_count[-1]+1) %} {% endif %}
     {% endif %}
-{% else %}
-    {% if break_space.append(30-row_count[-1]) %}{% endif %}
 {% endif %}
 
 <!-- ********   Dynamic content in rows start ******************************* -->
 
 {%- for row in doc.add_items -%}
 
-<!-- ********{% if (doc.add_items|count) >30 and pr[-1]>1 %}
-{% if cond.append(100) %}{% endif %}
-{% endif %} -->
-
-
 <!--      lines condition start   -->
 {% if pr[-1] == 1 %}
-    {% if row_count[-1] > 25 and row_count[-1] < 35 %}
-        {% if cond.append(87) %}{% endif %}
+    {% if row_count[-1] <= 23%}
+          {% if cond.append(69) %}{% endif %}
+    {% endif %}
+    {% if row_count[-1] > 23 and row_count[-1] < 35 %}
+        {% if cond.append(69) %}{% endif %}
     {% else %}
         {% if cond.append(90) %}{% endif %}
     {% endif %}
@@ -327,16 +321,22 @@
     {{ section_three_close() }}
 
 
-  
-    {% for n in range(29-last_lines[-1]) %}
-    <br>
+  {% if page_count[-1] == 1%}
+       {% for n in range(23-last_lines[-1]) %}
+        <br>
+     {% endfor %}
+  {% else %}
+      {% for n in range(29-last_lines[-1]) %}
+        <br>
     {% endfor %}
+  {% endif %}
+
 
     {{ section_four() }}
     
     <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
     
-    <h1>{{ break_space[-1] }} </h1>
+    <h1>{{ 29-last_lines[-1] }} </h1>
     
   
     
