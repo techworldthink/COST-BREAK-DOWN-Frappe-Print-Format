@@ -190,10 +190,10 @@
 
 {% if row_count[-1]-30 > 0  %}
     {% if page_count.append(1) %} {% endif %}
-    {% if ((row_count[-1]-30)/36)|int > 0  %}
-        {% if page_count.append(page_count[-1]+((row_count[-1]-30)/36)|int) %} {% endif %}
+    {% if ((row_count[-1]-30)/33)|int > 0  %}
+        {% if page_count.append(page_count[-1]+((row_count[-1]-30)/33)|int) %} {% endif %}
     {% endif %}
-    {% if ((row_count[-1]-30)%36)|int >= 0  %}
+    {% if ((row_count[-1]-30)%33)|int >= 0  %}
         {% if page_count.append(page_count[-1]+1) %} {% endif %}
     {% endif %}
 {% endif %}
@@ -215,20 +215,12 @@
         {% if cond.append(90) %}{% endif %}
     {% endif %}
     
-
-   
 {% elif pr[-1] == page_count[-1] %}
-     {% if (row_count[-1]-30)-(33*(pr[-1]-2)) == 27 %}
-          {% if cond.append(81) %}{% endif %}
-    {% else %}
         {% if cond.append(87) %}{% endif %}
-    {% endif %}
     
 {% elif pr[-1] != page_count[-1] %}   
    {% if cond.append(99) %}{% endif %}
 
-{% else %}
-    {% if cond.append(123) %}{% endif %}
 {% endif %}
 <!--      lines condition start   -->
 
