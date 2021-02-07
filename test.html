@@ -247,15 +247,12 @@
 
 
 
-
-
 {% if lines[-1] %} {% endif %}
 {% if lines.append( lines[-1] + 2 +((row.item|string|length() / 38)|int)) %} {% endif %}
 {% if (row.item|string|length % 38) > 0 %}
 {% if lines[-1] %} {% endif %}
 {% if lines.append( lines[-1] + 1 ) %} {% endif %}
 {% endif %}
-
 
 
 {% if (lines[-1]/cond[-1]) <= pr[-1] %} 
@@ -277,7 +274,6 @@
 
 {{ section_three_close() }}
 
-
     <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
     <div style="page-break-before: always;"></div>
     {% if pr[-1] %} {% endif %}
@@ -286,7 +282,7 @@
 <!-- head part start -->
 {{ section_one_start() }}
 <div class="column-box12">
-    <h5 class="page_no_">Continuation from page {{ pr[-1]-1 }} ....</h5>
+    <h5 class="page_no_">Continuation from page {{ pr[-1]-1 }} ...</h5>
 </div>
 {{ section_one_two() }}
 {{ section_one_three() }}
