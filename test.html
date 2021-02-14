@@ -21,7 +21,7 @@
 {% endmacro %}
 {% macro section_one_three() %}
     <div class="column-box3">
-        <img src="/files/wahni.png" class=" rounded mx-auto d-block" alt="Logo">
+        <img src="/files/wahni.png" class=" rounded mx-auto d-block img_size" alt="Logo">
     </div>
 {% endmacro %}
 {% macro section_one_stop() %}
@@ -212,10 +212,13 @@
     {% endif %}
     {% if row_count[-1] > 23 and row_count[-1] < 35 %}
         {% if cond.append(69) %}{% endif %}
+        {% if page_count[-1] == pr[-1] %}
+            {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
+        {% endif %}
     {% else %}
         {% if cond.append(90) %}{% endif %}
     {% endif %}
-    {% if page_count == pr[-1] %}
+    {% if page_count[-1] == pr[-1] %}
         {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
     {% endif %}
 {% elif pr[-1] == page_count[-1] %}
@@ -230,7 +233,7 @@
           {% if lines.append(87*(pr[-1]-1)) %} {% endif %}
            {% if break_mid.append(0) %}{% endif %}
           {% endif %}
-{% else %}
+    {% else %}
           {% if cond.append(99) %}{% endif %}
     {% endif %}
 
@@ -322,11 +325,11 @@
 
 
   {% if page_count[-1] == 1%}
-       {% for n in range(23-last_lines[-1]) %}
+       {% for n in range(25-last_lines[-1]) %}
         <br>
      {% endfor %}
   {% else %}
-      {% for n in range(29-last_lines[-1]) %}
+      {% for n in range(32-last_lines[-1]) %}
         <br>
     {% endfor %}
   {% endif %}
@@ -335,9 +338,10 @@
     {{ section_four() }}
     
     <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
-    
  
     
+    
+<h2>{{ last_lines[-1] }}</h2> 
   
     
     
