@@ -1,0 +1,19 @@
+<!--       page number setup start        -->
+
+{% if row_count[-1] >23 and row_count[-1] < 31 %}
+    {% if page_count.append(2) %} {% endif %}
+ {% else %}
+    {% if page_count.append(1) %} {% endif %}
+{% endif %}
+
+{% if row_count[-1]-30 > 0  %}
+    {% if page_count.append(1) %} {% endif %}
+    {% if ((row_count[-1]-30)/33)|int > 0  %}
+        {% if page_count.append(page_count[-1]+((row_count[-1]-30)/33)|int) %} {% endif %}
+    {% endif %}
+    {% if ((row_count[-1]-30)%33)|int >= 0  %}
+        {% if page_count.append(page_count[-1]+1) %} {% endif %}
+    {% endif %}
+{% endif %}
+
+<!--       page number setup end        
