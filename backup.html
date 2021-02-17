@@ -21,7 +21,7 @@
 {% endmacro %}
 {% macro section_one_three() %}
     <div class="column-box3">
-        <img src="/files/wahni.png" class=" rounded mx-auto d-block" alt="Logo">
+        <img src="/files/wahni.png" class=" rounded mx-auto d-block img_size" alt="Logo">
     </div>
 {% endmacro %}
 {% macro section_one_stop() %}
@@ -180,35 +180,82 @@
 {% set cond=[90] %}
 {% set page_count=[0] %}
 {% set row_count = [doc.add_items|count] %}
+{% set break_stage=[2] %}
+{% set break_mid=[1] %}
+{% set last_lines=[0] %}
 
-{% if  (doc.add_items|count)/30 > (((doc.add_items|count)/30)|round|int) +0.1  %}
-    {% if page_count.append(((doc.add_items|count)/30)|round|int +1) %} {% endif %}
+<!--       page number setup start        -->
+
+{% if row_count[-1] >23 %}
+    {% if page_count.append(1) %} {% endif %}
+    {% if row_count[-1] >23 and row_count[-1] < 31 %}
+        {% if page_count.append(page_count[-1] + 1) %} {% endif %}
+    {% elif (row_count[-1]-30)%33 > 29 and (row_count[-1]-30)%33 < 34 %}
+       {% if page_count.append(page_count[-1]+((row_count[-1]-30)/33)|int) %} {% endif %}
+       {% if page_count.append(page_count[-1] + 1) %} {% endif %}
+    {% else %}
+    {% if page_count.append(page_count[-1]+((row_count[-1]-30)/33)|int) %} {% endif %}
+        {% if (row_count[-1]-30)%33 < 33 %}
+            {% if page_count.append(page_count[-1] + 1) %} {% endif %}
+        {% endif %}
+    {% endif %}
 {% else %}
-    {% if page_count.append(((doc.add_items|count)/30)|round|int) %} {% endif %}
+    {% if page_count.append(1) %} {% endif %}
 {% endif %}
+
+<!--       page number setup end        -->
+
 <!-- ********   Dynamic content in rows start ******************************* -->
 
 {%- for row in doc.add_items -%}
 
-<!-- ********{% if (doc.add_items|count) >30 and pr[-1]>1 %}
-{% if cond.append(100) %}{% endif %}
-{% endif %} -->
-
+<!--      lines condition start   -->
 {% if pr[-1] == 1 %}
-    {% if row_count[-1] > 30 and row_count[-1] < 35 %}
-        {% if cond.append(80) %}{% endif %}
+    {% if row_count[-1] <= 23%}
+          {% if cond.append(69) %}{% endif %}
+    {% endif %}
+    {% if row_count[-1] > 23 and row_count[-1] < 35 %}
+        {% if cond.append(69) %}{% endif %}
+        {% if page_count[-1] == pr[-1] %}
+            {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
+        {% endif %}
     {% else %}
         {% if cond.append(90) %}{% endif %}
     {% endif %}
-{% elif pr[-1] != page_count[-1] %}   
-    {% if row_count[-1]-(30*(pr[-1]-1)) < 30 and row_count[-1]-(30*(pr[-1]-1)) < 35 %}
-          {% if cond.append(80) %}{% endif %}
-    {% else %}
-        {% if cond.append(100) %}{% endif %}
+    {% if page_count[-1] == pr[-1] %}
+        {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
     {% endif %}
 {% elif pr[-1] == page_count[-1] %}
-    {% if cond.append(100) %}{% endif %}
+        {% if cond.append(87) %}{% endif %}
+        {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
+    
+{% elif pr[-1] != page_count[-1] %}
+    {% if (row_count[-1]-30)-(33*(pr[-1]-2)) > 29 and (row_count[-1]-30)-(33*(pr[-1]-2)) < 34 %}
+
+          {% if cond.append(87) %}{% endif %}
+          {% if break_mid[-1] == 1 %}
+          {% if lines.append(87*(pr[-1]-1)) %} {% endif %}
+           {% if break_mid.append(0) %}{% endif %}
+          {% endif %}
+    {% else %}
+          {% if cond.append(99) %}{% endif %}
+    {% endif %}
+
 {% endif %}
+<!--      lines condition start   -->
+
+
+{% if break_stage[-1] == pr[-1] %}
+    {% if break_stage.append(break_stage[-1]-1) %}{% endif %}
+    {% if lines.append(lines[-1]+9) %} {% endif %}
+{% endif %}
+
+{% if (pr[-1] == page_count[-1] and break_stage[-1] == 1) %}
+    {% if break_stage.append(break_stage[-1]-1) %}{% endif %}
+    {% if lines.append(lines[-1] - 12* (page_count[-1]) +18) %} {% endif %}
+{% endif %}
+
+
 
 {% if lines[-1] %} {% endif %}
 {% if lines.append( lines[-1] + 2 +((row.item|string|length() / 38)|int)) %} {% endif %}
@@ -216,6 +263,8 @@
 {% if lines[-1] %} {% endif %}
 {% if lines.append( lines[-1] + 1 ) %} {% endif %}
 {% endif %}
+
+
 {% if (lines[-1]/cond[-1]) <= pr[-1] %} 
 
     <!--   ROWS    -->
@@ -237,6 +286,7 @@
 
 
     <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
+    </div>
     <div style="page-break-before: always;"></div>
     {% if pr[-1] %} {% endif %}
     {% if pr.append( pr[-1] + 1 ) %} {% endif %}
@@ -244,7 +294,7 @@
 <!-- head part start -->
 {{ section_one_start() }}
 <div class="column-box12">
-    <h5 class="page_no_">Continuation from page {{ pr[-1]-1 }} ....</h5>
+    <h5 class="page_no_">Continuation from page {{ pr[-1]-1 }} ...</h5>
 </div>
 {{ section_one_two() }}
 {{ section_one_three() }}
@@ -278,21 +328,25 @@
     {{ section_three_close() }}
 
 
-    {% for n in range(((79-lines[-1]%cond[-1])/3)|int) %}
-    <br>
+  {% if page_count[-1] == 1%}
+       {% for n in range(25-last_lines[-1]) %}
+        <br>
+     {% endfor %}
+  {% else %}
+      {% for n in range(32-last_lines[-1]) %}
+        <br>
     {% endfor %}
+  {% endif %}
+
 
     {{ section_four() }}
     
     <h5 class="page_no"> {{ pr[-1] }}/{{ page_count[-1] }}</h5>
+ 
     
-    <h3> {{ lines[-1] }}</h3>
-     <h3>{{ cond[-1]}}</h3>
-    <h3>{{ row_count[-1]}}</h3>
-    <h3>{{ page_count[-1]}}</h3>
-    <h3>{{ ((doc.add_items|count)/30) }} </h3>
-    <h3>{{ ((doc.add_items|count)/30)|round }} </h3>
-    <h3>{{ ((doc.add_items|count)/30)|round|int }} </h3>
+    
+<h2>{{ last_lines[-1] }}</h2> 
+  
     
     
 

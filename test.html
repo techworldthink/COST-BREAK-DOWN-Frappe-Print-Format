@@ -215,16 +215,14 @@
           {% if cond.append(69) %}{% endif %}
     {% endif %}
     {% if row_count[-1] > 23 and row_count[-1] < 35 %}
-        {% if cond.append(69) %}{% endif %}
-        {% if page_count[-1] == pr[-1] %}
-            {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
-        {% endif %}
+        {% if cond.append(69) %}{% endif %} 
     {% else %}
-        {% if cond.append(90) %}{% endif %}
+        {% if cond.append(90) %}{% endif %}                                                                                                                                
     {% endif %}
     {% if page_count[-1] == pr[-1] %}
         {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
     {% endif %}
+      
 {% elif pr[-1] == page_count[-1] %}
         {% if cond.append(87) %}{% endif %}
         {% if last_lines.append(last_lines[-1]+1)%}{% endif %}
@@ -247,12 +245,20 @@
 
 {% if break_stage[-1] == pr[-1] %}
     {% if break_stage.append(break_stage[-1]-1) %}{% endif %}
-    {% if lines.append(lines[-1]+9) %} {% endif %}
+    {% if page_count[-1] == pr[-1] %}
+        {% if lines[-1] >78 %}
+            {% if lines.append(lines[-1]-3) %} {% endif %}
+        {% else %}
+        {% if lines.append(lines[-1] + 18) %} {% endif %}
+        {% endif %}
+    {% else %}
+        {% if lines.append(lines[-1]+9) %} {% endif %}
+    {% endif %}
 {% endif %}
 
 {% if (pr[-1] == page_count[-1] and break_stage[-1] == 1) %}
     {% if break_stage.append(break_stage[-1]-1) %}{% endif %}
-    {% if lines.append(lines[-1] - 12* (page_count[-1]) +18) %} {% endif %}
+    {% if lines.append(lines[-1] - 12* (page_count[-1])) %} {% endif %}
 {% endif %}
 
 
