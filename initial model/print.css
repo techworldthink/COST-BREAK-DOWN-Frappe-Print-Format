@@ -1,0 +1,99 @@
+body{
+    width:100%;
+    margin:0;
+    padding:0;
+    }
+    .center {
+      display: block;
+      text-align: center;
+    }
+    .green {
+      color: #00992b;
+    }
+    .annexure {
+      margin-top: 0;
+      padding-top: 2em;
+      padding-bottom: 1em;
+    }
+    .main-head {
+      margin-top: 2em;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    svg {
+      margin-bottom: 4em;
+    }
+    .item {
+      border: 1px solid black;
+      margin-top: 3em;
+      width: 100%;
+      margin-bottom: 3em;
+    }
+    .item th,
+    .item td,
+    .item tr {
+      border: 1px solid black;
+      padding: 5px;
+    }
+    .footer {
+      background-color: #3ac93a;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 10px;
+      margin-bottom: 2em;
+    }
+    .table-head {
+      background-color: #3ac93a;
+      text-align: center;
+    }
+    .contact {
+      font-size: 12px;
+      margin-top: 4em;
+    }
+    .column-box {
+      float: left;
+      width: 33%;
+    }
+    .column-box-right {
+      float: right;
+      width: 33%;
+      margin-right: 6em;
+      margin-bottom: 3em;
+    }
+    
+    .bold {
+      font-weight: 700;
+    }
+    
+    .left-td {
+      text-align: left;
+      padding-left: 2em;
+    }
+    
+    /*........................Page A4..............*/
+    
+    body {
+      background: rgb(204, 204, 204);
+    }
+    page {
+      background: white;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 0.5cm;
+      box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+    }
+    page[size="A4"] {
+      width: 21cm;
+      height: 29.7cm;
+    }
+    @media print {
+      body,
+      page {
+        margin: 0;
+        box-shadow: 0;
+      }
+    }
+    
+    .print-format{
+    padding:0;
+    }

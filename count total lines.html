@@ -1,0 +1,11 @@
+
+{% set total_lines = [1] %}
+
+{%- for row in doc.add_items -%}
+{% if total_lines.append( total_lines[-1] + 2 +((row.item|string|length() / 38)|int)) %} {% endif %}
+{% if (row.item|string|length % 38) > 0 %}
+{% if total_lines.append( lines[-1] + 1 ) %} {% endif %}
+{% endif %}
+{%- endfor -%}
+
+{% set row_count = [total_lines|int] %}
